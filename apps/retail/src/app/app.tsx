@@ -1,237 +1,162 @@
-import styled from '@emotion/styled';
+import {
+  Avatar,
+  Box,
+  Flex,
+  Heading,
+  Stack,
+  useColorModeValue as mode,
+} from '@chakra-ui/react';
+import * as React from 'react';
+import {
+  BsFillBookmarksFill,
+  BsFillInboxFill,
+  BsPencilSquare,
+  BsSearch,
+} from 'react-icons/bs';
+import {
+  MobileMenuButton,
+  NavBreadcrumb,
+  NavSectionTitle,
+  ScrollArea,
+  SearchInput,
+  SidebarLink,
+  useMobileMenuState,
+  AccountSwitcher,
+} from '@ew/ui';
 
-import { ReactComponent as Logo } from './logo.svg';
-import star from './star.svg';
-import { Card } from '@ew/ui';
-import { Box, Button } from '@chakra-ui/react';
-console.log(Card);
-console.log(Box);
+const data = {
+  users: [
+    {
+      name: 'Melinda Jones',
+      image:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8aGVhZHNob3R8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+    },
+    {
+      name: 'Ram Prakash',
+      image:
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8aGVhZHNob3R8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+    },
+    {
+      name: 'Gernald Hawkins',
+      image:
+        'https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mjd8fGhlYWRzaG90fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+    },
+    {
+      name: 'Jessie Munday',
+      image:
+        'https://images.unsplash.com/photo-1595875708571-854a3492c245?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NTZ8fGhlYWRzaG90fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+    },
+    {
+      name: 'Diana Fisher 🏳️‍🌈',
+      image:
+        'https://images.unsplash.com/photo-1531078215167-91fcfe45b39e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NjF8fGhlYWRzaG90fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60',
+    },
+  ],
+};
 
-const StyledApp = styled.div`
-  font-family: sans-serif;
-  min-width: 300px;
-  max-width: 600px;
-  margin: 50px auto;
-
-  .gutter-left {
-    margin-left: 9px;
-  }
-
-  .col-span-2 {
-    grid-column: span 2;
-  }
-
-  .flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  header {
-    background-color: #143055;
-    color: white;
-    padding: 5px;
-    border-radius: 3px;
-  }
-
-  main {
-    padding: 0 36px;
-  }
-
-  p {
-    text-align: center;
-  }
-
-  h1 {
-    text-align: center;
-    margin-left: 18px;
-    font-size: 24px;
-  }
-
-  h2 {
-    text-align: center;
-    font-size: 20px;
-    margin: 40px 0 10px 0;
-  }
-
-  .resources {
-    text-align: center;
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-gap: 9px;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .resource {
-    color: #0094ba;
-    height: 36px;
-    background-color: rgba(0, 0, 0, 0);
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 4px;
-    padding: 3px 9px;
-    text-decoration: none;
-  }
-
-  .resource:hover {
-    background-color: rgba(68, 138, 255, 0.04);
-  }
-
-  pre {
-    padding: 9px;
-    border-radius: 4px;
-    background-color: black;
-    color: #eee;
-  }
-
-  details {
-    border-radius: 4px;
-    color: #333;
-    background-color: rgba(0, 0, 0, 0);
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    padding: 3px 9px;
-    margin-bottom: 9px;
-  }
-
-  summary {
-    outline: none;
-    height: 36px;
-    line-height: 36px;
-  }
-
-  .github-star-container {
-    margin-top: 12px;
-    line-height: 20px;
-  }
-
-  .github-star-container a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #333;
-  }
-
-  .github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27, 31, 35, 0.2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg, #fafbfc, #eff3f6 90%);
-    margin-left: 4px;
-    font-weight: 600;
-  }
-
-  .github-star-badge:hover {
-    background-image: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%);
-    border-color: rgba(27, 31, 35, 0.35);
-    background-position: -0.5em;
-  }
-  .github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
-  }
-`;
-
-export function App() {
+export const App = () => {
+  const { isOpen, toggle } = useMobileMenuState();
   return (
-    <StyledApp>
-      <header className="flex">
-        <Logo width="75" height="75" />
-        <h1>Welcome to retail!</h1>
-      </header>
-      <Card>
-        <main>
-          <h2>Resources &amp; Tools</h2>
-          <p>Thank you for using and showing some ♥ for Nx.</p>
-          <div className="flex github-star-container">
-            <a
-              href="https://github.com/nrwl/nx"
-              target="_blank"
-              rel="noopener noreferrer"
+    <Flex
+      height="100vh"
+      bg="gray.800"
+      overflow="hidden"
+      sx={{ '--sidebar-width': '16rem' }}
+    >
+      <Box
+        as="nav"
+        display="block"
+        flex="1"
+        width="var(--sidebar-width)"
+        left="0"
+        py="6"
+        px="3"
+        color="gray.200"
+        position="fixed"
+      >
+        <Box fontSize="sm" lineHeight="tall">
+          <AccountSwitcher />
+          <ScrollArea pt="5" pb="6">
+            <SidebarLink
+              display={{ base: 'block', lg: 'none' }}
+              mb="2"
+              icon={<BsSearch />}
             >
-              {' '}
-              If you like Nx, please give it a star:
-              <div className="github-star-badge">
-                <img src={star} className="material-icons" alt="" />
-                Star
-              </div>
-            </a>
-          </div>
-          <p>Here are some links to help you get started.</p>
-          <ul className="resources">
-            <li className="col-span-2">
-              <a
-                className="resource flex"
-                href="https://egghead.io/playlists/scale-react-development-with-nx-4038"
-              >
-                Scale React Development with Nx (Course)
-              </a>
-            </li>
-            <li className="col-span-2">
-              <a
-                className="resource flex"
-                href="https://nx.dev/latest/react/tutorial/01-create-application"
-              >
-                Interactive tutorial
-              </a>
-            </li>
-            <li className="col-span-2">
-              <a className="resource flex" href="https://nx.app/">
-                <svg
-                  width="36"
-                  height="36"
-                  viewBox="0 0 120 120"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              Search
+            </SidebarLink>
+            <Stack pb="6">
+              <SidebarLink icon={<BsFillInboxFill />}>Inbox</SidebarLink>
+              <SidebarLink icon={<BsFillBookmarksFill />}>
+                Bookmarks
+              </SidebarLink>
+              <SidebarLink icon={<BsPencilSquare />}>Drafts</SidebarLink>
+            </Stack>
+            <Stack pb="6">
+              <NavSectionTitle>Chats</NavSectionTitle>
+              <SidebarLink>🎉 Inbox</SidebarLink>
+              <SidebarLink>👍 Personal</SidebarLink>
+              <SidebarLink>🦋 Work</SidebarLink>
+            </Stack>
+            <Stack>
+              <NavSectionTitle>Members</NavSectionTitle>
+              {data.users.map((user, index) => (
+                <SidebarLink
+                  key={index}
+                  avatar={
+                    <Avatar size="xs" name={user.name} src={user.image} />
+                  }
                 >
-                  <path
-                    d="M120 15V30C103.44 30 90 43.44 90 60C90 76.56 76.56 90 60 90C43.44 90 30 103.44 30 120H15C6.72 120 0 113.28 0 105V15C0 6.72 6.72 0 15 0H105C113.28 0 120 6.72 120 15Z"
-                    fill="#0E2039"
-                  />
-                  <path
-                    d="M120 30V105C120 113.28 113.28 120 105 120H30C30 103.44 43.44 90 60 90C76.56 90 90 76.56 90 60C90 43.44 103.44 30 120 30Z"
-                    fill="white"
-                  />
-                </svg>
-                <span className="gutter-left">Nx Cloud</span>
-              </a>
-            </li>
-          </ul>
-          <h2>Next Steps</h2>
-          <p>Here are some things you can do with Nx.</p>
-          <details open>
-            <summary>Add UI library</summary>
-            <pre>{`# Generate UI lib
-nx g @nrwl/react:lib ui
-
-# Add a component
-nx g @nrwl/react:component xyz --project ui`}</pre>
-          </details>
-          <details>
-            <summary>View dependency graph</summary>
-            <pre>{`nx dep-graph`}</pre>
-          </details>
-          <details>
-            <summary>Run affected commands</summary>
-            <pre>{`# see what's been affected by changes
-nx affected:dep-graph
-
-# run tests for current changes
-nx affected:test
-
-# run e2e tests for current changes
-nx affected:e2e
-  `}</pre>
-          </details>
-        </main>
-        <Button>CONFIRM</Button>
-      </Card>
-    </StyledApp>
+                  {user.name}
+                </SidebarLink>
+              ))}
+            </Stack>
+          </ScrollArea>
+        </Box>
+      </Box>
+      <Box
+        flex="1"
+        p={{ base: '0', md: '6' }}
+        marginStart={{ md: 'var(--sidebar-width)' }}
+        position="relative"
+        left={isOpen ? 'var(--sidebar-width)' : '0'}
+        transition="left 0.2s"
+        bg="white"
+      >
+        <Box
+          maxW="2560px"
+          bg={mode('white', 'gray.700')}
+          height="100%"
+          pb="6"
+          rounded={{ md: 'lg' }}
+        >
+          <Flex direction="column" height="full">
+            <Flex
+              w="full"
+              py="4"
+              justify="space-between"
+              align="center"
+              px="10"
+            >
+              <Flex align="center" minH="8">
+                <MobileMenuButton onClick={toggle} isOpen={isOpen} />
+                <NavBreadcrumb />
+              </Flex>
+              <SearchInput />
+            </Flex>
+            <Flex direction="column" flex="1" overflow="auto" px="10" pt="8">
+              <Heading size="md" fontWeight="extrabold" mb="6">
+                Product Vision
+              </Heading>
+              <Box
+                flex="1"
+                borderWidth="3px"
+                borderStyle="dashed"
+                rounded="xl"
+              />
+            </Flex>
+          </Flex>
+        </Box>
+      </Box>
+    </Flex>
   );
-}
-
-export default App;
+};
