@@ -1,5 +1,5 @@
-import { Text, TextProps } from '@chakra-ui/react'
-import * as React from 'react'
+import { Text, TextProps } from '@chakra-ui/react';
+import * as React from 'react';
 
 export const NavSectionTitle = (props: TextProps) => (
   <Text
@@ -11,4 +11,4 @@ export const NavSectionTitle = (props: TextProps) => (
     color="gray.400"
     {...props}
   />
-)
+);

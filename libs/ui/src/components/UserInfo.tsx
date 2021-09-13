@@ -1,14 +1,20 @@
-import { Avatar, Box, HStack, Text, useColorModeValue as mode } from '@chakra-ui/react'
-import * as React from 'react'
+import {
+  Avatar,
+  Box,
+  HStack,
+  Text,
+  useColorModeValue as mode,
+} from '@chakra-ui/react';
+import * as React from 'react';
 
 interface UserInfoProps {
-  name: string
-  image?: string
-  email: string
+  name: string;
+  image?: string;
+  email: string;
 }
 
 export const UserInfo = (props: UserInfoProps) => {
-  const { name, image, email } = props
+  const { name, image, email } = props;
   return (
     <HStack display="inline-flex">
       <Avatar size="sm" name={name} src={image} />
@@ -19,5 +25,5 @@ export const UserInfo = (props: UserInfoProps) => {
         </Text>
       </Box>
     </HStack>
-  )
-}
+  );
+};

@@ -1,3 +1,5 @@
 {
-  "singleQuote": true
+  "singleQuote": true,
+  "importOrder": ["^@ew/backend", "^@ew/ui", "^[./]"],
+  "importOrderSeparation": false
 }

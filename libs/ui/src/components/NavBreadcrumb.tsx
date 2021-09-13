@@ -1,12 +1,26 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbProps } from '@chakra-ui/react'
-import * as React from 'react'
-import { HiChevronRight } from 'react-icons/hi'
+import {
+  Box,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbProps,
+} from '@chakra-ui/react';
+import * as React from 'react';
+import { HiChevronRight } from 'react-icons/hi';
 
 export const NavBreadcrumb = (props: BreadcrumbProps) => (
   <Breadcrumb
     fontSize="sm"
     {...props}
-    separator={<Box as={HiChevronRight} color="gray.400" fontSize="md" top="2px" pos="relative" />}
+    separator={
+      <Box
+        as={HiChevronRight}
+        color="gray.400"
+        fontSize="md"
+        top="2px"
+        pos="relative"
+      />
+    }
   >
     <BreadcrumbItem color="inherit">
       <BreadcrumbLink>Welcome</BreadcrumbLink>
@@ -15,4 +29,4 @@ export const NavBreadcrumb = (props: BreadcrumbProps) => (
       <BreadcrumbLink>Product Vision</BreadcrumbLink>
     </BreadcrumbItem>
   </Breadcrumb>
-)
+);

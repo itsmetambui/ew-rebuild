@@ -1,1 +1,1 @@
-export { useMobileMenuState } from './useMobileMenuState'
+export { useMobileMenuState } from './useMobileMenuState';
