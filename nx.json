@@ -27,6 +27,13 @@
     ]
   },
   "projects": {
+    "landing": {
+      "tags": []
+    },
+    "landing-e2e": {
+      "tags": [],
+      "implicitDependencies": ["landing"]
+    },
     "retail": {
       "tags": []
     },

@@ -1,6 +1,84 @@
 {
   "version": 2,
   "projects": {
+    "landing": {
+      "root": "apps/landing",
+      "sourceRoot": "apps/landing",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/landing",
+            "outputPath": "dist/apps/landing"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "landing:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "landing:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "landing:build:production"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/landing"],
+          "options": {
+            "jestConfig": "apps/landing/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/landing/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
+    },
+    "landing-e2e": {
+      "root": "apps/landing-e2e",
+      "sourceRoot": "apps/landing-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/landing-e2e/cypress.json",
+            "devServerTarget": "landing:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "landing:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/landing-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "retail": {
       "root": "apps/retail",
       "sourceRoot": "apps/retail/src",
@@ -136,6 +214,12 @@
         "style": "@emotion/styled"
       },
       "library": {
+        "style": "@emotion/styled",
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
         "style": "@emotion/styled",
         "linter": "eslint"
       }
