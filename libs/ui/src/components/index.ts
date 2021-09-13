@@ -8,3 +8,6 @@ export { SidebarLink } from './SidebarLink';
 export { UserInfo } from './UserInfo';
 export { AccountSwitcherButton } from './AccountSwitcherButton';
 export { AccountSwitcher } from './AccountSwitcher';
+export { Logo } from './Logo';
+export { SigninForm } from './SigninForm';
+export { UnderlineLink } from './UnderlineLink';
