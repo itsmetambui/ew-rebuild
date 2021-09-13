@@ -8,8 +8,10 @@ This project was generated using [Nx](https://nx.dev).
 
 ## TODO
 
+- Configure husky and lint-staged
 - Configure dev port for different apps
 - Configure lib for aws
+- Restructure UI lib?
 
 ## Adding capabilities to your workspace
 
